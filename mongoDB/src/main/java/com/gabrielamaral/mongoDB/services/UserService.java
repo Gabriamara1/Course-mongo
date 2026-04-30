@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tools.jackson.databind.ext.javatime.ser.DurationSerializer;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -21,6 +22,11 @@ public class UserService {
 
     public User save(User user) {
         return repo.save(user);
+    }
+
+    public User findById(String id) {
+        Optional<User> user = repo.findById(id);
+        return user.orElseThrow(()-> new RuntimeException("Usuário não encontrado."));
     }
 
 }
