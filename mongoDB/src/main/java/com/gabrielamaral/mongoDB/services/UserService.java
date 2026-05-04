@@ -1,6 +1,7 @@
 package com.gabrielamaral.mongoDB.services;
 
 import com.gabrielamaral.mongoDB.domain.User;
+import com.gabrielamaral.mongoDB.dto.UserDTO;
 import com.gabrielamaral.mongoDB.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,11 @@ public class UserService {
         return user.orElseThrow(()-> new RuntimeException("Usuário não encontrado."));
     }
 
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+    }
 }
