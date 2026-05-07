@@ -1,5 +1,6 @@
 package com.gabrielamaral.mongoDB.resources;
 
+import com.gabrielamaral.mongoDB.domain.Post;
 import com.gabrielamaral.mongoDB.domain.User;
 import com.gabrielamaral.mongoDB.dto.UserDTO;
 import com.gabrielamaral.mongoDB.services.UserService;
@@ -59,5 +60,12 @@ public class UserResource {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
+
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
